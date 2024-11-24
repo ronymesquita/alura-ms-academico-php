@@ -8,3 +8,10 @@ RUN docker-php-ext-install pdo_pgsql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+COPY . /app
+
+WORKDIR /app
+
+RUN composer install
+
+ENTRYPOINT [ "php", "receive.php" ]
