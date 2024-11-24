@@ -50,3 +50,17 @@ function sendMailTo(OODBBean $student): void
     $mailer = new Mailer($transport);
     $mailer->send($email);
 }
+
+function generatePassword($length = 12) {
+    $length = min(max(8, $length), 14);
+
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
+    $password = '';
+
+    for ($i = 0; $i < $length; $i++) {
+        $index = random_int(0, strlen($characters) - 1);
+        $password .= $characters[$index];
+    }
+
+    return $password;
+}

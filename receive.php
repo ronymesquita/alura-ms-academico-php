@@ -20,8 +20,8 @@ $channel->basic_consume($queue, no_ack: true, callback: function (AMQPMessage $m
     $properties = json_decode($msg->body, true);
     $student = R::dispense('students');
     $student->name = $properties['name'];
-    $student->email = $properties['email'];
-    $student->password = password_hash('123456', PASSWORD_ARGON2ID);
+    $student->email = $properties['email'];    
+    $student->password = password_hash(generatePassword(), PASSWORD_ARGON2ID);
     R::store($student);
 
     sendMailTo($student);
